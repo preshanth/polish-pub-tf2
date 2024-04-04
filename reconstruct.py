@@ -26,24 +26,25 @@ plt.rcParams.update({
                     'legend.frameon': False,
                     'legend.loc': 'lower right'})
 
-def reconstruct(fn_img, fn_model, scale, fnhr=None,
-                nbit=16):
-    if fn_img.endswith('npy'):
-        datalr = np.load(fn_img)[:, :]
-    elif fn_img.endswith('png'):
-      try:
-          datalr = load_image(fn_img)
-      except:
-          return 
+def reconstruct(fn_img, fn_model, scale, fnhr=None, nbit=16):
+    try:
+        if fn_img.endswith('npy'):
+            datalr = np.load(fn_img)[:, :]
+        elif fn_img.endswith('png'):
+            datalr = load_image(fn_img)
+    except Exception as e:
+        print(f"Error loading low resolution image: {e}")
+        return None, None, None
 
     if fnhr is not None:
-        if fnhr.endswith('npy'):
-            datalr = np.load(fnhr)[:, :]
-        elif fnhr.endswith('png'):
-          try:
-              datahr = load_image(fnhr)
-          except:
-              return 
+        try:
+            if fnhr.endswith('npy'):
+                datahr = np.load(fnhr)[:, :]
+            elif fnhr.endswith('png'):
+                datahr = load_image(fnhr)
+        except Exception as e:
+            print(f"Error loading high resolution image: {e}")
+            return None, None, None
     else:
         datahr = None
 
@@ -51,9 +52,9 @@ def reconstruct(fn_img, fn_model, scale, fnhr=None,
     model.load_weights(fn_model)
     datalr = datalr[:,:,None]
 
-
     datasr = resolve_single(model, datalr, nbit=nbit)
     datasr = datasr.numpy()
+
     return datalr, datasr, datahr
 
 def plot_reconstruction(datalr, datasr, datahr=None, vm=1, 

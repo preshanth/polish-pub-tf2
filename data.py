@@ -317,7 +317,7 @@ class RadioSky:
 
 def random_crop(lr_img, hr_img, hr_crop_size=96, scale=2):
     lr_crop_size = hr_crop_size // scale
-    lr_img_shape = tf.shape(lr_img)[:2]
+    lr_img_shape = tf.shape(input=lr_img)[:2]
 
     lr_w = tf.random.uniform(shape=(), maxval=lr_img_shape[1] - lr_crop_size + 1, dtype=tf.int32)
     lr_h = tf.random.uniform(shape=(), maxval=lr_img_shape[0] - lr_crop_size + 1, dtype=tf.int32)
@@ -333,9 +333,9 @@ def random_crop(lr_img, hr_img, hr_crop_size=96, scale=2):
 
 def random_flip(lr_img, hr_img):
     rn = tf.random.uniform(shape=(), maxval=1)
-    return tf.cond(rn < 0.5,
-                   lambda: (lr_img, hr_img),
-                   lambda: (tf.image.flip_left_right(lr_img),
+    return tf.cond(pred=rn < 0.5,
+                   true_fn=lambda: (lr_img, hr_img),
+                   false_fn=lambda: (tf.image.flip_left_right(lr_img),
                             tf.image.flip_left_right(hr_img)))
 
 

@@ -40,7 +40,7 @@ def evaluate(model, dataset, nbit=8):
 #        psnr_value = psnr16(hr, sr)[0]
         psnr_value = psnr(hr, sr, nbit=nbit)[0]
         psnr_values.append(psnr_value)
-    return tf.reduce_mean(psnr_values)
+    return tf.reduce_mean(input_tensor=psnr_values)
 
 
 # ---------------------------------------
@@ -104,6 +104,6 @@ def psnr16(x1, x2):
 
 
 def pixel_shuffle(scale):
-    return lambda x: tf.nn.depth_to_space(x, scale)
+    return lambda x: tf.nn.depth_to_space(input=x, block_size=scale)
 
 

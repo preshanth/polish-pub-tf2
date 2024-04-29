@@ -94,7 +94,8 @@ def plot_reconstruction(datalr, datasr, datahr=None, vm=1,
         plt.axis('off')
 
     plt.tight_layout()
-    plt.show()
+    #plt.show()
+    plt.savefig('reconstructed_image.png',dpi=300)
 
 if __name__=='__main__':
     # Example usage:

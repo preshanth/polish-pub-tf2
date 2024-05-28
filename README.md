@@ -10,6 +10,18 @@ The super-resolution neural network and the code to train it comes from the WDSR
 
 https://github.com/krasserm/super-resolution
 
+# Setting up a virtual env
+Install micromamba ```"${SHELL}" <(curl -L micro.mamba.pm/install.sh)``` and create a new empty environment. 
+
+Once in the environment:
+
+```micromamba install python=3.10 ```
+
+```sudo apt install nvidia-cuda-toolkit```
+
+```pip install -r requirements.txt```
+
+
 # using POLISH
 
 Start by constructing a training/validation dataset. This will consist of a set of image pairs (true sky / dirty image) such that POLISH can learn deconvolution. You will require a PSF for the interferometer whose data you wish to deconvolve. This will produce 800 training image pairs, 100 validation image pairs using a forward-modeled dsa-2000 PSF. The radio sky simulation assumes the approximate senstivity of DSA-2000, i.e. SEFD=2.5 Jy. By default, these images will be 2048x2048 (true sky, high res, 0.25'' pixels) and 512x512 (dirty image, low res, 1'' pixels), but these parameters can be changed with command line arguments.

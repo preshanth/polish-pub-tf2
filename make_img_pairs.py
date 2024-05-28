@@ -75,7 +75,7 @@ def gaussian2D( coords,  # x and y coordinates for each image.
 
     G = amplitude * np.exp(-0.5*np.matmul(np.matmul(mat_coords[:, :, np.newaxis, :],
                                                     mat_cov_inv),
-                                          mat_cofords[..., np.newaxis])) + offset
+                                          mat_coords[..., np.newaxis])) + offset
     return G.squeeze()
 
 def normalize_data(data, nbit=16):

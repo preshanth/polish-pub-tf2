@@ -1,6 +1,6 @@
 import matplotlib.pylab as plt
 import numpy as np
-
+import astropy.io.fits as fits
 from astropy.modeling.models import Sersic2D
 
 try:

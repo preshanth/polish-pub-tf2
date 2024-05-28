@@ -85,9 +85,7 @@ tensorflow[and-cuda]==2.14.0
 tensorflow-addons==0.22.0
 tensorflow-estimator==2.14.0
 tensorflow-io-gcs-filesystem==0.36.0
-tensorrt==8.5.3.1
-tensorrt-bindings==8.6.1
-tensorrt-libs==8.6.1
+tensorrt
 termcolor==2.4.0
 tifffile==2024.2.12
 traitlets==5.14.2

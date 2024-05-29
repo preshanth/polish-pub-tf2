@@ -3,6 +3,19 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Data directories
+data-examples/
+dsa-example/    
+model/
+psf/
+
+# Files created
+*.log
+*.data*
+*.txt
+*.png
+*.index
+
 # C extensions
 *.so
 

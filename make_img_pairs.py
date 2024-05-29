@@ -75,7 +75,7 @@ def gaussian2D( coords,  # x and y coordinates for each image.
 
     G = amplitude * np.exp(-0.5*np.matmul(np.matmul(mat_coords[:, :, np.newaxis, :],
                                                     mat_cov_inv),
-                                          mat_cofords[..., np.newaxis])) + offset
+                                          mat_coords[..., np.newaxis])) + offset
     return G.squeeze()
 
 def normalize_data(data, nbit=16):
@@ -394,7 +394,7 @@ if __name__=='__main__':
         kernel = kernel[nkern//2-options.ksize//2:nkern//2+options.ksize//2, 
                         nkern//2-options.ksize//2:nkern//2+options.ksize//2]
     elif options.kernel in ('Gaussian', 'gaussian'):
-        kernel1D = signal.gaussian(8, std=1).reshape(8, 1)
+        kernel1D = signal.windows.gaussian(8, std=1).reshape(8, 1)
         kernel = np.outer(kernel1D, kernel1D)
     elif options.kernel.endswith('fits'):
         from skimage import transform
